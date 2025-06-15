@@ -1,0 +1,164 @@
+{
+  "name": "Sheet+email",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1n5RUfAs_rYE0EITh7D4zOnEvonKXs7uzMFlsrTsZrFQ",
+          "mode": "list",
+          "cachedResultName": "dem0_automate",
+          "cachedResultUrl": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3f53eda8-298f-4dca-9fc7-3fbe56dfc75d",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "tgQLm1JjqjGfg8H2",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "email@gmail.com",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        680,
+        0
+      ],
+      "id": "c6ff0208-e833-4dc0-9bbe-6de5d722c147",
+      "name": "Gmail",
+      "webhookId": "3ba767a5-76b8-48fe-844e-cf35990d8d0a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ETPTvIYtv9J6eIBB",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json[\"choices\"][0][\"message\"][\"content\"];\nconst parsed = JSON.parse(raw);\n\nreturn [{\n  json: {\n    subject: parsed.subject,\n    body: parsed.body\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "5e803879-9524-4ddd-9579-0ff4819cd6ec",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Authorization\": \"Bearer api_key\",\n  \"Content-Type\": \"application/json\"\n}\n",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n   {\n  \"role\": \"system\",\n  \"content\": \"You are an assistant that formats client order information into a summary email also add some writeups. Return your response in JSON with two fields:\\n\\n{\\n  \\\"subject\\\": \\\"...\\\",\\n  \\\"body\\\": \\\"...\\\"\\n}\\n\\nDo not include any extra explanation. Only return valid JSON.\"\n}\n,\n    {\n      \"role\": \"user\",\n      \"content\": \"Here is the client order:\\nOrder {{ $json.OrderID }}:\\nCustomer Name: {{ $json.CutomerName }}\\nProduct: {{ $json.Product }}\\nQuantity: {{ $json.Quantity }}\\nPrice: {{ $json.Price }}\\nOrder Date: {{ $json.OrderDate }}\\nStatus: {{ $json.Status }}\"\n    }\n  ]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "b6335c8e-970c-4dba-a30d-45f3c7356778",
+      "name": "HTTP Request(GPT-3.5)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "wGgDxnhJnv1sZMMj",
+          "name": "Header Auth account"
+        },
+        "httpCustomAuth": {
+          "id": "towrWyeQzj5SvK56",
+          "name": "Custom Auth account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request(GPT-3.5)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request(GPT-3.5)": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c6929a6f-a04b-4179-80b8-f4363b57f54f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "268c2fc0c0c4163bdc41af356ffc6091216dd1aaf5508ffda762ca2f7f6b66c4"
+  },
+  "id": "djQFQ041A900IJjJ",
+  "tags": []
+}
