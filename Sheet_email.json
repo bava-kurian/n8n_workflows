@@ -12,7 +12,7 @@
         },
         "documentId": {
           "__rl": true,
-          "value": "1n5RUfAs_rYE0EITh7D4zOnEvonKXs7uzMFlsrTsZrFQ",
+          "value": "DOCUMENT_ID_PLACEHOLDER",
           "mode": "list",
           "cachedResultName": "dem0_automate",
           "cachedResultUrl": ""
@@ -32,12 +32,12 @@
         0,
         0
       ],
-      "id": "3f53eda8-298f-4dca-9fc7-3fbe56dfc75d",
+      "id": "NODE_ID_PLACEHOLDER_1",
       "name": "Google Sheets Trigger",
       "credentials": {
         "googleSheetsTriggerOAuth2Api": {
-          "id": "tgQLm1JjqjGfg8H2",
-          "name": "Google Sheets Trigger account"
+          "id": "CREDENTIAL_ID_PLACEHOLDER_1",
+          "name": "GOOGLE_SHEETS_TRIGGER_ACCOUNT"
         }
       }
     },
@@ -57,13 +57,13 @@
         680,
         0
       ],
-      "id": "c6ff0208-e833-4dc0-9bbe-6de5d722c147",
+      "id": "NODE_ID_PLACEHOLDER_2",
       "name": "Gmail",
-      "webhookId": "3ba767a5-76b8-48fe-844e-cf35990d8d0a",
+      "webhookId": "WEBHOOK_ID_PLACEHOLDER",
       "credentials": {
         "gmailOAuth2": {
-          "id": "ETPTvIYtv9J6eIBB",
-          "name": "Gmail account"
+          "id": "CREDENTIAL_ID_PLACEHOLDER_2",
+          "name": "GMAIL_ACCOUNT"
         }
       }
     },
@@ -77,7 +77,7 @@
         440,
         0
       ],
-      "id": "5e803879-9524-4ddd-9579-0ff4819cd6ec",
+      "id": "NODE_ID_PLACEHOLDER_3",
       "name": "Code"
     },
     {
@@ -100,16 +100,16 @@
         220,
         0
       ],
-      "id": "b6335c8e-970c-4dba-a30d-45f3c7356778",
+      "id": "NODE_ID_PLACEHOLDER_4",
       "name": "HTTP Request(GPT-3.5)",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "wGgDxnhJnv1sZMMj",
-          "name": "Header Auth account"
+          "id": "CREDENTIAL_ID_PLACEHOLDER_3",
+          "name": "HEADER_AUTH_ACCOUNT"
         },
         "httpCustomAuth": {
-          "id": "towrWyeQzj5SvK56",
-          "name": "Custom Auth account"
+          "id": "CREDENTIAL_ID_PLACEHOLDER_4",
+          "name": "CUSTOM_AUTH_ACCOUNT"
         }
       }
     }
@@ -154,10 +154,10 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c6929a6f-a04b-4179-80b8-f4363b57f54f",
+  "versionId": "VERSION_ID_PLACEHOLDER",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "268c2fc0c0c4163bdc41af356ffc6091216dd1aaf5508ffda762ca2f7f6b66c4"
+    "instanceId": "INSTANCE_ID_PLACEHOLDER"
   },
   "id": "djQFQ041A900IJjJ",
   "tags": []
