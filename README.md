@@ -133,8 +133,4 @@ When a new order comes in via a webhook or form, the workflow:
 
 ---
 
-## 👨‍💼 Created by
 
-**Customer Success Automation Team**
-
-````
